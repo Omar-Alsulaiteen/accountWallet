@@ -5,7 +5,43 @@
   crossorigin="anonymous"
 />
 
-<div class="row">
-  <div class="col">test1</div>
-  <div class="col-2 bg-black">test2</div>
+<div class="row h-100">
+  <div class="col-sm"></div>
+  <div class="col-sm border border-1 rounded m-auto">
+    <form class="m-5" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="username"
+          class="form-control"
+          id="username"
+          name="username"
+          aria-describedby="emailHelp"
+          placeholder="Enter username"
+          ngModel
+          name="username"
+        />
+        <br />
+        <!-- <small id="emailHelp" class="form-text text-muted"
+          >We'll never share your username with anyone else.</small
+        > -->
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          ngModel
+          name="password"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mt-5">Submit</button>
+    </form>
+    <small class="m-2 link-primary" style="cursor: pointer" routerLink="signup"
+      >Doesn't Have an account? Signup</small
+    >
+  </div>
+  <div class="col-sm"></div>
 </div>
