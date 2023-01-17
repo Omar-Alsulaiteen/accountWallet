@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DepositeComponent } from './deposite/deposite.component';
+import { DepositComponent } from './deposit/deposit.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupComponent } from './signup/signup.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     component: HomepageComponent,
     children: [
       { path: 'withdraw', component: WithdrawComponent },
-      { path: 'deposite', component: DepositeComponent },
+      { path: 'deposit', component: DepositComponent },
       { path: 'transfer', component: TransferComponent },
       { path: 'transactions', component: TransactionsComponent },
     ],

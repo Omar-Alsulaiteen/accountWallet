@@ -24,7 +24,7 @@ public class GlobalTransactionService {
 	@Autowired
 	AccountRepository accountRepo;
 	
-	public void transfer(GlobalTransaction transaction) {
+	public Account transfer(GlobalTransaction transaction) {
 		Optional<Account> optionalSender = accountRepo.findById(transaction.getSender().getId());
 		Optional<Account> optionalReceiver = accountRepo.findById(transaction.getReceiver().getId());
 
@@ -52,6 +52,7 @@ public class GlobalTransactionService {
 		receiver.setBalance(newReceiverBalance);
 		
 		repo.save(transaction);
+		return sender;
 
 	}
 

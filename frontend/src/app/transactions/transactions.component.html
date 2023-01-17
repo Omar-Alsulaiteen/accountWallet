@@ -1,1 +1,60 @@
-<p>transactions works!</p>
+<div class="col-sm-6 offset-3">
+  <table class="table table-hover border border-1">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Transaction Type</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of personalTransactions">
+        <th>{{ transaction?.id }}</th>
+        <td>{{ transaction?.transactionType | titlecase }}</td>
+        <td>{{ transaction?.amount }} K.D</td>
+        <td>{{ transaction?.date }}</td>
+        <td>{{ transaction?.time }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-md-8 offset-2 mt-5">
+  <table class="table table-hover border border-1">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From Account</th>
+        <th scope="col">to Account</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of globalTransactions">
+        <td>{{ transaction?.id }}</td>
+        <td>
+          {{ transaction?.sender.id }} - {{ transaction?.sender.firstName }}
+          {{ transaction?.sender.lastName }}
+        </td>
+        <td>
+          {{ transaction?.receiver.id }} -
+          {{ transaction?.receiver.firstName }}
+          {{ transaction?.receiver.lastName }}
+        </td>
+        <td>
+          {{ transaction?.amount }}
+        </td>
+        <td>
+          {{ transaction?.date }}
+        </td>
+        <td>
+          {{ transaction?.time }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

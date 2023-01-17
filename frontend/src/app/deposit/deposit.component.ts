@@ -3,36 +3,23 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
-
 @Component({
-  selector: 'app-transfer',
-  templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.css'],
+  selector: 'app-deposit',
+  templateUrl: './deposit.component.html',
+  styleUrls: ['./deposit.component.css'],
 })
-export class TransferComponent {
-  accounts!: Account[];
-
+export class DepositComponent {
   constructor(
     private httpClient: HttpClient,
     private accountService: AccountService
   ) {}
 
-  ngOnInit() {
+  inputOnSubmit(form: NgForm) {
+    console.log('In deposit submit form!!!');
     this.httpClient
-      .get<Account[]>('http://localhost:8081/account/all-except/1')
-      .subscribe((response) => {
-        this.accounts = response;
-      });
-  }
-
-  onSubmit(form: NgForm) {
-    this.httpClient
-      .post<Account>('http://localhost:8081/global/transfer', {
-        sender: {
+      .post<Account>('http://localhost:8081/personal/deposit', {
+        account: {
           id: 1,
-        },
-        receiver: {
-          id: form.value.toAccount,
         },
         amount: form.value.amount,
       })

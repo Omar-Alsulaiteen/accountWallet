@@ -1,6 +1,7 @@
 package com.example.main.services;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,9 @@ public class AccountService {
 	@Autowired
 	AccountRepository repo;
 
-	public Optional<Account> accountDataService(String username) {
+	public Optional<Account> accountDataService(Integer id) {
 		
-		Optional<Account> account = repo.findByUsername(username);
+		Optional<Account> account = repo.findById(id);
 		if(account.isEmpty()) {
 			throw new AccountNotFoundException();
 		}
@@ -49,6 +50,11 @@ public class AccountService {
 		}
 		
 		return validatedUser;
+	}
+
+	public Iterable<Account> findAllExceptMine(Integer id) {
+		Iterable<Account> accounts = repo.findAccountsExcludeMine(id);
+		return accounts;
 	}
 
 }

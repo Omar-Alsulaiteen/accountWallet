@@ -33,7 +33,7 @@ public class PersonalTransaction {
 	LocalTime time;
 	
 	@Column(nullable = false)
-	String tansactionType;
+	String transactionType;
 	
 	@Column(nullable = false)
 	Double amount;
@@ -44,7 +44,7 @@ public class PersonalTransaction {
 		this.account = account;
 		this.date = date;
 		this.time = time;
-		this.tansactionType = tansactionType;
+		this.transactionType = tansactionType;
 		this.amount = amount;
 	}
 
@@ -83,12 +83,12 @@ public class PersonalTransaction {
 		this.time = time;
 	}
 
-	public String getTansactionType() {
-		return tansactionType;
+	public String getTransactionType() {
+		return transactionType;
 	}
 
-	public void setTansactionType(String tansactionType) {
-		this.tansactionType = tansactionType;
+	public void setTransactionType(String tansactionType) {
+		this.transactionType = tansactionType;
 	}
 
 	public Double getAmount() {
@@ -102,7 +102,7 @@ public class PersonalTransaction {
 	@Override
 	public String toString() {
 		return "PersonalTransaction [id=" + id + ", account=" + account + ", date=" + date + ", time=" + time
-				+ ", tansactionType=" + tansactionType + ", amount=" + amount + "]";
+				+ ", tansactionType=" + transactionType + ", amount=" + amount + "]";
 	}
 	
 	

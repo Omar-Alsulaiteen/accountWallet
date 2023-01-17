@@ -3,6 +3,8 @@ package com.example.main.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +28,9 @@ public class AccountController {
 		return service.login(user);
 	}
 	
-	@GetMapping("/{username}")
-	public Optional<Account> accountData(@PathVariable String username) {
-		return service.accountDataService(username);
+	@GetMapping("/{id}")
+	public Optional<Account> accountData(@PathVariable Integer id) {
+		return service.accountDataService(id);
 	}
 	
 	@PostMapping
@@ -39,6 +41,11 @@ public class AccountController {
 	@DeleteMapping("/{id}")
 	public void deleteAccount(@PathVariable Integer id) {
 		service.deleteAccount(id);
+	}
+	
+	@GetMapping("/all-except/{id}")
+	public ResponseEntity<Iterable<Account>> findAllExceptMine(@PathVariable Integer id) {
+		return new ResponseEntity<>(service.findAllExceptMine(id), HttpStatus.OK);
 	}
 
 }

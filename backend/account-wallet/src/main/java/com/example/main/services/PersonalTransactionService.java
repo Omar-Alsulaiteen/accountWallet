@@ -25,7 +25,7 @@ public class PersonalTransactionService {
 	@Autowired
 	AccountRepository accountRepo;
 
-	public void deposite(PersonalTransaction transaction) {
+	public Account deposit(PersonalTransaction transaction) {
 		Optional<Account> optionalAccount = accountRepo.findById(transaction.getAccount().getId());
 		if (optionalAccount.isEmpty())
 			throw new AccountNotFoundException();
@@ -36,8 +36,10 @@ public class PersonalTransactionService {
 		accountRepo.save(account);
 		
 		
-		transaction.setTansactionType("deposite");
+		transaction.setTransactionType("deposite");
 		repo.save(transaction);
+		
+		return account;
 	}
 
 	public Set<PersonalTransaction> getTransactions(Integer accountId) {
@@ -48,7 +50,7 @@ public class PersonalTransactionService {
 		return transactions;
 	}
 
-	public void withdraw(PersonalTransaction transaction) {
+	public Account withdraw(PersonalTransaction transaction) {
 		Optional<Account> optionalAccount = accountRepo.findById(transaction.getAccount().getId());
 		Double newBalance;
 		if (optionalAccount.isEmpty())
@@ -63,8 +65,9 @@ public class PersonalTransactionService {
 		account.setBalance(account.getBalance() - transaction.getAmount());
 		accountRepo.save(account);
 		
-		transaction.setTansactionType("withdraw");
+		transaction.setTransactionType("withdraw");
 		repo.save(transaction);
-
+		
+		return account;
 	}
 }

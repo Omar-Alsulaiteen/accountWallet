@@ -9,13 +9,26 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage.component';
-import { DepositeComponent } from './deposite/deposite.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { PersonalTransactionComponent } from './personal-transaction/personal-transaction.component';
+import { DepositComponent } from './deposit/deposit.component';
+import { AccountCardComponent } from './account-card/account-card.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, SignupComponent, HomepageComponent, DepositeComponent, WithdrawComponent, TransferComponent, TransactionsComponent],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    SignupComponent,
+    HomepageComponent,
+    WithdrawComponent,
+    TransferComponent,
+    TransactionsComponent,
+    PersonalTransactionComponent,
+    DepositComponent,
+    AccountCardComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

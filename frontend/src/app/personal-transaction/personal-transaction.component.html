@@ -8,17 +8,8 @@
 <div class="row mb-4">
   <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <div class="card">
-      <p class="card-header">Transfer</p>
+      <p class="card-header">{{ title }}</p>
       <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="card-body form-group offset-1 col-9">
-          <label for="amount">To Account</label>
-          <select type="text" class="input-group" name="toAccount" ngModel>
-            <option *ngFor="let account of accounts" value="{{ account?.id }}">
-              {{ account?.id }} - {{ account?.firstName }}
-              {{ account?.lastName }}
-            </option>
-          </select>
-        </div>
         <div class="card-body form-group offset-1 col-9">
           <label for="amount">Amount</label>
           <input type="number" class="input-group" name="amount" ngModel />
