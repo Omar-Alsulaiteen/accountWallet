@@ -28,9 +28,9 @@ public class GlobalTransactionController {
 		return new ResponseEntity<>(service.transfer(transaction), HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("transactions/{accountId}")
-	public Set<GlobalTransaction> getTransactions(@PathVariable Integer accountId) {
-		return service.getTransactions(accountId);
+	@GetMapping("transactions/{username}")
+	public Set<GlobalTransaction> getTransactions(@PathVariable String username) {
+		return service.getTransactions(username);
 	}
 
 }

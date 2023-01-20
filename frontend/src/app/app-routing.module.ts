@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthConfigService } from './auth-config.service';
 import { DepositComponent } from './deposit/deposit.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -17,11 +18,28 @@ const routes: Routes = [
   {
     path: 'app',
     component: HomepageComponent,
+    canActivate: [AuthConfigService],
     children: [
-      { path: 'withdraw', component: WithdrawComponent },
-      { path: 'deposit', component: DepositComponent },
-      { path: 'transfer', component: TransferComponent },
-      { path: 'transactions', component: TransactionsComponent },
+      {
+        path: 'withdraw',
+        component: WithdrawComponent,
+        canActivate: [AuthConfigService],
+      },
+      {
+        path: 'deposit',
+        component: DepositComponent,
+        canActivate: [AuthConfigService],
+      },
+      {
+        path: 'transfer',
+        component: TransferComponent,
+        canActivate: [AuthConfigService],
+      },
+      {
+        path: 'transactions',
+        component: TransactionsComponent,
+        canActivate: [AuthConfigService],
+      },
     ],
   },
 ];
@@ -29,5 +47,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthConfigService],
 })
 export class AppRoutingModule {}

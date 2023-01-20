@@ -20,7 +20,8 @@ public interface AccountRepository extends CrudRepository<Account, Integer>{
 	Iterable<Account> getAccountsByUsername(String username);
 	Optional<Account> findByUsername(String username);
 	
-	@Query("select a from Account a where a.id <> ?1")
-	Iterable<Account> findAccountsExcludeMine(Integer id);
+	@Query("select a from Account a where a.username <> ?1")
+	Iterable<Account> findAccountsExcludeMine(String username);
+	void deleteByUsername(String username);
 
 }

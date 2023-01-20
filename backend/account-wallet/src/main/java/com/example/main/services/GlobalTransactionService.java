@@ -25,16 +25,16 @@ public class GlobalTransactionService {
 	AccountRepository accountRepo;
 	
 	public Account transfer(GlobalTransaction transaction) {
-		Optional<Account> optionalSender = accountRepo.findById(transaction.getSender().getId());
+		Optional<Account> optionalSender = accountRepo.findByUsername(transaction.getSender().getUsername());
 		Optional<Account> optionalReceiver = accountRepo.findById(transaction.getReceiver().getId());
 
 		Double newBalance;
 		Double newReceiverBalance;
 		
 		if (optionalSender.isEmpty())
-			throw new AccountNotFoundException();
+			throw new AccountNotFoundException("Sender account not found");
 		if (optionalReceiver.isEmpty())
-			throw new AccountNotFoundException();
+			throw new AccountNotFoundException("Receiver account not found");
 
 		Account sender = optionalSender.get();
 		Account receiver = optionalReceiver.get();
@@ -50,14 +50,16 @@ public class GlobalTransactionService {
 		accountRepo.save(sender);
 		
 		receiver.setBalance(newReceiverBalance);
+		accountRepo.save(receiver);
 		
+		transaction.setSender(sender);
 		repo.save(transaction);
 		return sender;
 
 	}
 
-	public Set<GlobalTransaction> getTransactions(Integer accountId) {
-		Set<GlobalTransaction> transactions = repo.findGlobalTransactionsBySenderIdOrReceiverIdOrderByDateDescTimeDesc(accountId, accountId);
+	public Set<GlobalTransaction> getTransactions(String username) {
+		Set<GlobalTransaction> transactions = repo.findGlobalTransactionsBySenderUsernameOrReceiverUsernameOrderByDateDescTimeDesc(username, username);
 		if(transactions.isEmpty()) {
 			throw new TransactionsNotFoundException();
 		}

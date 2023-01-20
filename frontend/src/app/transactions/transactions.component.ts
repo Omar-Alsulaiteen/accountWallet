@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AccountService } from '../account.service';
+import { jwtDecoder } from '../jwtDecoder';
 
 @Component({
   selector: 'app-transactions',
@@ -16,16 +17,16 @@ export class TransactionsComponent {
     private accountService: AccountService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.httpClient
-      .get(`http://localhost:8081/personal/transactions/1`)
+      .get(`http://localhost:8081/personal/transactions/${jwtDecoder().sub}`)
       .subscribe((response) => {
         this.personalTransactions = response;
         console.log(response);
       });
 
     this.httpClient
-      .get(`http://localhost:8081/global/transactions/1`)
+      .get(`http://localhost:8081/global/transactions/${jwtDecoder().sub}`)
       .subscribe((response) => {
         this.globalTransactions = response;
         console.log(response);

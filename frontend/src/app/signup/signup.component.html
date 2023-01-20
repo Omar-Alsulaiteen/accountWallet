@@ -5,7 +5,14 @@
   crossorigin="anonymous"
 />
 
-<div class="row h-100">
+<div class="row h-100 my-5">
+  <div
+    class="col-sm-8 offset-sm-2 mb-4 col-lg-6 offset-lg-3 alert alert-danger text-center"
+    *ngIf="status == 2"
+  >
+    {{ message }}
+  </div>
+
   <div class="col-sm-3"></div>
   <div class="col-sm-6 border border-1 rounded m-auto">
     <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="m-5">
@@ -19,6 +26,7 @@
           aria-describedby="emailHelp"
           placeholder="Enter username"
           ngModel
+          required
         />
       </div>
       <div class="form-group mb-4">
@@ -31,10 +39,11 @@
           aria-describedby="emailHelp"
           placeholder="Enter username"
           ngModel
+          required
         />
       </div>
       <div class="form-group mb-4">
-        <label for="username">Last Name</label>
+        <label for="lastName">Last Name</label>
         <input
           type="text"
           class="form-control"
@@ -43,6 +52,7 @@
           aria-describedby="emailHelp"
           placeholder="Enter last name"
           ngModel
+          required
         />
       </div>
 
@@ -55,6 +65,8 @@
           name="password"
           placeholder="Password"
           ngModel
+          required
+          minlength="5"
         />
       </div>
       <div class="form-group">
@@ -66,6 +78,7 @@
           name="cpassword"
           placeholder="Password"
           ngModel
+          required
         />
       </div>
 

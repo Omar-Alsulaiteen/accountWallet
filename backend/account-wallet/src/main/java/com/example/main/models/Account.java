@@ -21,6 +21,7 @@ public class Account {
 	String username;
 	
 	@Column(nullable = false)
+	@JsonIgnore
 	String password;
 
 	@Column(nullable = false)

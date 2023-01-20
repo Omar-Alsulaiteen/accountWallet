@@ -24,9 +24,9 @@ public class PersonalTransactionController {
 	@Autowired
 	PersonalTransactionService service;
 	
-	@GetMapping("/transactions/{accountId}")
-	public Set<PersonalTransaction> getTransactions(@PathVariable Integer accountId) {
-		return service.getTransactions(accountId);
+	@GetMapping("/transactions/{username}")
+	public Set<PersonalTransaction> getTransactions(@PathVariable String username) {
+		return service.getTransactions(username);
 	}
 	
 	@PostMapping("/deposit")

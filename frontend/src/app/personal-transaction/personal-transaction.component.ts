@@ -9,13 +9,19 @@ import { AccountService } from '../account.service';
   styleUrls: ['./personal-transaction.component.css'],
 })
 export class PersonalTransactionComponent {
+  @Input('status')
+  status!: number;
+
+  @Input('title')
+  title!: string;
+
+  @Input('message')
+  message!: string;
+
   constructor(
     private httpClient: HttpClient,
     private accountService: AccountService
   ) {}
-
-  @Input('title')
-  title!: string;
 
   @Input('inputOnSubmit')
   onSubmit!: (args: NgForm) => void;

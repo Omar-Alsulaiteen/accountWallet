@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -7,15 +8,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent {
-  account!: any;
-
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit() {
-    this.httpClient
-      .get('http://localhost:8081/account/1')
-      .subscribe((response) => {
-        this.account = response;
-      });
+  constructor(private router: Router) {}
+  logout() {
+    localStorage.removeItem('jwt');
+    this.router.navigateByUrl('');
   }
 }

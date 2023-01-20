@@ -13,39 +13,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.main.containers.AccountContainer;
+import com.example.main.containers.JwtResponse;
+import com.example.main.containers.LoginRequest;
 import com.example.main.models.Account;
 import com.example.main.services.AccountService;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
+
 @RestController
-@RequestMapping("account")
 public class AccountController {
 
 	@Autowired
 	AccountService service;
 	
-	@PostMapping("/login")
-	public Account login(@RequestBody Account user) {
-		return service.login(user);
+	@PermitAll
+	@PostMapping("login")
+	public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest user) {
+		return ResponseEntity.ok(new JwtResponse(service.login(user)));	}
+	
+	@GetMapping("account/{username}")
+	public Optional<Account> accountData(@PathVariable String username) {
+		return service.accountDataService(username);
 	}
 	
-	@GetMapping("/{id}")
-	public Optional<Account> accountData(@PathVariable Integer id) {
-		return service.accountDataService(id);
+	@PermitAll
+	@PostMapping("signup")
+	public void createAccount(@RequestBody AccountContainer accountContainer) {
+		service.createAccount(accountContainer);
 	}
 	
-	@PostMapping
-	public void createAccount(@RequestBody Account account) {
-		service.createAccount(account);
+	@DeleteMapping("account/{username}")
+	public void deleteAccount(@PathVariable String username) {
+		service.deleteAccount(username);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deleteAccount(@PathVariable Integer id) {
-		service.deleteAccount(id);
-	}
-	
-	@GetMapping("/all-except/{id}")
-	public ResponseEntity<Iterable<Account>> findAllExceptMine(@PathVariable Integer id) {
-		return new ResponseEntity<>(service.findAllExceptMine(id), HttpStatus.OK);
+	@GetMapping("account/all-except/{username}")
+	public ResponseEntity<Iterable<Account>> findAllExceptMine(@PathVariable String username) {
+		return new ResponseEntity<>(service.findAllExceptMine(username), HttpStatus.OK);
 	}
 
 }

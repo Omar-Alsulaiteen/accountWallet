@@ -11,6 +11,7 @@ import com.example.main.models.GlobalTransaction;
 @Repository
 public interface GlobalTransactionRepository extends CrudRepository<GlobalTransaction, Integer>{
 
-	Set<GlobalTransaction> findGlobalTransactionsBySenderIdOrReceiverIdOrderByDateDescTimeDesc(Integer senderId, Integer receiverId);
+	Set<GlobalTransaction> findGlobalTransactionsBySenderUsernameOrReceiverUsernameOrderByDateDescTimeDesc(
+			String username, String username2);
 
 }

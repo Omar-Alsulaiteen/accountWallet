@@ -21,6 +21,11 @@ public class TransactionsExceptionController {
 		return new ResponseEntity<>("Low Balance", HttpStatus.NOT_ACCEPTABLE);
 	}
 
-	
+	@ExceptionHandler(value = java.lang.NullPointerException.class)
+	public ResponseEntity<Object> exception(java.lang.NullPointerException
+ exception) {
+		return new ResponseEntity<>("Empty values are not allowed", HttpStatus.NOT_ACCEPTABLE);
+	}
+
 
 }

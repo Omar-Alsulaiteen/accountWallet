@@ -26,7 +26,7 @@ public class PersonalTransactionService {
 	AccountRepository accountRepo;
 
 	public Account deposit(PersonalTransaction transaction) {
-		Optional<Account> optionalAccount = accountRepo.findById(transaction.getAccount().getId());
+		Optional<Account> optionalAccount = accountRepo.findByUsername(transaction.getAccount().getUsername());
 		if (optionalAccount.isEmpty())
 			throw new AccountNotFoundException();
 		
@@ -35,15 +35,15 @@ public class PersonalTransactionService {
 		account.setBalance(account.getBalance() + transaction.getAmount());
 		accountRepo.save(account);
 		
-		
+		transaction.setAccount(account);
 		transaction.setTransactionType("deposite");
 		repo.save(transaction);
 		
 		return account;
 	}
 
-	public Set<PersonalTransaction> getTransactions(Integer accountId) {
-		Set<PersonalTransaction> transactions = repo.findPersonalTransactionsByAccountIdOrderByDateDescTimeDesc(accountId);
+	public Set<PersonalTransaction> getTransactions(String username){
+		Set<PersonalTransaction> transactions = repo.findPersonalTransactionsByAccountUsernameOrderByDateDescTimeDesc(username);
 		if(transactions.isEmpty()) {
 			throw new TransactionsNotFoundException();
 		}
@@ -51,7 +51,7 @@ public class PersonalTransactionService {
 	}
 
 	public Account withdraw(PersonalTransaction transaction) {
-		Optional<Account> optionalAccount = accountRepo.findById(transaction.getAccount().getId());
+		Optional<Account> optionalAccount = accountRepo.findByUsername(transaction.getAccount().getUsername());
 		Double newBalance;
 		if (optionalAccount.isEmpty())
 			throw new AccountNotFoundException();
@@ -65,6 +65,7 @@ public class PersonalTransactionService {
 		account.setBalance(account.getBalance() - transaction.getAmount());
 		accountRepo.save(account);
 		
+		transaction.setAccount(account);
 		transaction.setTransactionType("withdraw");
 		repo.save(transaction);
 		

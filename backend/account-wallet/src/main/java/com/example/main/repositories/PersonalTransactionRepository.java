@@ -15,5 +15,5 @@ public interface PersonalTransactionRepository extends CrudRepository<PersonalTr
 	
 		Iterable<PersonalTransaction> findAccountsByDate(LocalDate date);
 		Iterable<PersonalTransaction> findAccountsByDateBetween(LocalDate date1, LocalDate date2);
-		Set<PersonalTransaction> findPersonalTransactionsByAccountIdOrderByDateDescTimeDesc(Integer accountId);
+		Set<PersonalTransaction> findPersonalTransactionsByAccountUsernameOrderByDateDescTimeDesc(String username);
 }

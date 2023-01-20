@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { TransferComponent } from './transfer/transfer.component';
@@ -15,6 +15,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { PersonalTransactionComponent } from './personal-transaction/personal-transaction.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { AccountCardComponent } from './account-card/account-card.component';
+import { JwtInterceptorService } from './jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,13 @@ import { AccountCardComponent } from './account-card/account-card.component';
     AccountCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

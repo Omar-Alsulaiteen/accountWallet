@@ -5,6 +5,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import org.hibernate.PropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -15,7 +16,7 @@ import com.example.main.exceptions.InvalidUsernameOrPasswordException;
 public class AccountExcpetionCotroller {
 	@ExceptionHandler(value = AccountNotFoundException.class)
 	public ResponseEntity<Object> exception(AccountNotFoundException exception) {
-		return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
@@ -32,7 +33,10 @@ public class AccountExcpetionCotroller {
 	public ResponseEntity<Object> exception(InvalidUsernameOrPasswordException exception) {
 		return new ResponseEntity<>("Invalid username or password", HttpStatus.NOT_ACCEPTABLE);
 	}
-
-
+	
+	@ExceptionHandler(value = BadCredentialsException.class)
+	public ResponseEntity<Object> exception(BadCredentialsException  exception) {
+		return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+	}
 
 }
