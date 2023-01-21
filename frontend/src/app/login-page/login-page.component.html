@@ -5,10 +5,14 @@
   crossorigin="anonymous"
 />
 
-<div class="row h-100">
+<div class="row">
   <div
-    class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4 border border-1 rounded m-auto"
+    class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4 border border-1 rounded mt-5"
   >
+    <div class="alert alert-danger text-center my-5" *ngIf="status == 2">
+      {{ message }}
+    </div>
+
     <form class="m-5" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
       <div class="form-group">
         <label for="username">Username</label>
@@ -21,6 +25,7 @@
           placeholder="Enter username"
           ngModel
           name="username"
+          required
         />
         <br />
         <!-- <small id="emailHelp" class="form-text text-muted"
@@ -36,6 +41,7 @@
           placeholder="Password"
           ngModel
           name="password"
+          required
         />
       </div>
       <button type="submit" class="btn btn-primary mt-5">Submit</button>
