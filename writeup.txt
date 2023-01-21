@@ -1,0 +1,60 @@
+AccountWallet Project for Simplilearn.
+
+- It's a wallet so the user can add money to his account, withdraw money from his account, transfer it to other accounts, and show transactions.
+
+- There will be six pages
+	* sign up page
+
+	* sign in page
+
+	* Homepage
+
+	* Withdraw page
+
+	* Transfer page
+
+	* Show transactions page
+
+
+Sprint
+
+- Features included in sprint 1:
+
+	* Create the spring boot project
+
+	* do the API for
+		# Withdraw
+
+		# Deposit
+
+		# Transfer
+
+		# Show transactions
+
+	# Add spring security to the project (for JWT, login, and encoding passwords)
+
+
+- Features included in sprint 2:
+
+- GitHub repository to manage the project
+
+- Create an Angular App
+	* Add the following pages
+
+		* sign up page
+
+		* sign in page
+
+		* Homepage
+
+		* Withdraw page
+
+		* Transfer page
+
+		* Show transactions page
+
+
+
+
+
+
